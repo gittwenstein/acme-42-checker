@@ -29,6 +29,8 @@ For clarity's sake, let's take it step by step:
 	```
 2. Download the corresponding zipped test suite from the table above.
 
+	>**Note:** *Don't right-click on the **link**, and "Save link as"; it'll corrupt the file headers. Instead, follow the link by **left-clicking** it, and then in the upper right corner clicking the **"Download raw file"*** (smallish button with downward pointing arrow).
+
 3. Place the zipped file in the repo to be tested; in our example:
 	```bash
 	cp ~/Downloads/_test.tar.gz ~/projects/C00
