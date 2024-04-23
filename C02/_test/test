@@ -106,4 +106,10 @@ check 10 ft_strlcpy 'kobyla ma maly bok' 1000
 check 10 ft_strlcpy '   kobyla   ma\t maly bok' 85
 check 10 ft_strlcpy 'KOBYLA "NEma" maly BOK' 0
 check 10 ft_strlcpy '8327 fdskljfh lsdkfh89 ;,.,/[]' 20
-check_diff 11 ft_putstr_non_printable 'char *str'
+check_diff 11 ft_putstr_non_printable 0
+check_diff 11 ft_putstr_non_printable 1
+check_diff 11 ft_putstr_non_printable 2
+check_diff 11 ft_putstr_non_printable 3
+check_diff 11 ft_putstr_non_printable 4
+check_diff 11 ft_putstr_non_printable 5
+check_diff 11 ft_putstr_non_printable 6

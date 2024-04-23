@@ -15,7 +15,7 @@ Draining of the pool is fast approaching, and wasting precious eval points (and,
 Using these ready-made tests is a fast way to check your code compliance during development, and gives you a better chance to succeed once your code faces Darth Moul.
 
 ### Evaluators
-Lost of work to do? Don't feel like wasting time making sure the code you have to evaluate compiles and does what it's supposed to do? Download, unzip, run script, and back to your own development.
+Heaps of work to do? Don't feel like wasting time making sure the code you have to evaluate compiles and does what it's supposed to do? Download, unzip, run script, and back to your own code.
 
 ## How?
 
