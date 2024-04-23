@@ -1,0 +1,79 @@
+#!/bin/bash
+
+R='\033[0;31m'
+G='\033[0;32m'
+B='\033[0;33m'
+Y='\033[0;33m'
+NC='\033[0m'
+COMPILE='cc *.c'
+
+check() 
+{
+    echo -en "${Y}Exercise $1	${NC}"
+    if [ -f ../ex$1/$2 ]; then
+        cc test$1.c ../ex$1/$2.c
+		./a.out
+		# exit_code=$?
+
+		if [[ $? ]]; then
+            echo -e "${G}OK${NC}"
+        else
+            echo -e "${R}KO${NC}"
+        fi    
+
+		rm a.out
+	else
+        echo -e "${R}Solution file not found"
+    fi
+}
+
+check_diff()
+{
+	echo -en "${Y}Exercise $1	${NC}"
+    if [ -f ../ex$1/$2.c ]; then
+		cc test$1.c ../ex$1/$2.c
+		./a.out $3 > output
+		if [ -f a.out ] && diff output "expected_output/$2($3)" > dump; then
+			echo -e "${G}OK${NC}"
+        else
+            echo -e "${R}KO${NC}"
+			if [ $3 ]; then 
+				echo -e "	Execution failed for input: $3" 
+			fi
+        fi 
+		rm a.out   
+	else
+        echo -e "${R}Solution file not found${NC}"
+    fi
+}
+
+########## NORMINETTE ##########
+tar cf docasno.tar *.c
+rm *.c
+cd ..
+norminette
+cd _test
+tar xf docasno.tar
+rm docasno.tar
+################################
+
+check_diff 00 ft_putchar
+check_diff 01 ft_print_alphabet 
+check_diff 02 ft_print_reverse_alphabet
+check_diff 03 ft_print_numbers
+check_diff 04 ft_is_negative -1
+check_diff 04 ft_is_negative  0
+check_diff 04 ft_is_negative  1
+check_diff 05 ft_print_comb
+check_diff 06 ft_print_comb2
+check_diff 07 ft_putnbr 0
+check_diff 07 ft_putnbr 123
+check_diff 07 ft_putnbr 2147483647
+check_diff 07 ft_putnbr -1
+check_diff 07 ft_putnbr -2147483648
+check_diff 08 ft_print_combn 0
+check_diff 08 ft_print_combn 1
+check_diff 08 ft_print_combn 3
+check_diff 08 ft_print_combn 5
+check_diff 08 ft_print_combn 9
+check_diff 08 ft_print_combn 123
