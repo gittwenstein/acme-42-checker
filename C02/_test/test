@@ -1,0 +1,109 @@
+#!/bin/bash
+
+R='\033[0;31m'
+G='\033[0;32m'
+B='\033[0;33m'
+Y='\033[0;33m'
+NC='\033[0m'
+COMPILE='cc *.c'
+
+check() 
+{
+    echo -en "${Y}Exercise $1	${NC}"
+    if [ -f ../ex$1/$2.c ]; then
+        cc test$1.c ../ex$1/$2.c
+		./a.out "$3" "$4"
+		if [ $? = 0 ]; then
+            echo -e "${G}OK${NC}"
+        else
+			echo -e "${R}Execution failed for input:${NC} ${Y}$3${NC}"
+            echo -e "${R}KO${NC}"
+        fi    
+		rm a.out
+	else
+        echo -e "${R}Solution file not found${NC}"
+    fi
+}
+
+check_diff()
+{
+	echo -en "${Y}Exercise $1	${NC}"
+    if [ -f ../ex$1/$2.c ]; then
+		cc test$1.c ../ex$1/$2.c
+		./a.out "$4" > output
+		if [ -f a.out ] && diff output "expected_output/$2($3)" > dump; then
+			echo -e "${G}OK${NC}"
+        else
+			if [ "$4" ]; then 
+				echo -e "	Execution failed for input: $4" 
+			fi
+            echo -e "${R}KO${NC}"
+        fi 
+		rm a.out
+	else
+        echo -e "${R}Solution file not found${NC}"
+    fi
+}
+
+########## NORMINETTE ##########
+if [ $1 ] && [ $1 = '-n' ]; then
+	# echo HELLO
+	tar cf docasno.tar *.c
+	rm *.c
+	cd ..
+	norminette
+	cd _test
+	tar xf docasno.tar
+	rm docasno.tar
+fi
+################################
+
+check 00 ft_strcpy 'kobyla ma maly bok'
+check 00 ft_strcpy '   kobyla   ma\t maly bok'
+check 00 ft_strcpy 'KOBYLA "NEma" maly BOK'
+check 00 ft_strcpy '8327 fdskljfh lsdkfh89 ;,.,/[]'
+check 01 ft_strncpy 'kobyla ma maly bok' 10
+check 01 ft_strncpy '   kobyla   ma\t maly bok' 85
+check 01 ft_strncpy 'KOBYLA "NEma" maly BOK' 0
+check 01 ft_strncpy '8327 fdskljfh lsdkfh89 ;,.,/[]' 20
+check 02 ft_str_is_alpha 'Monty Python' 0
+check 02 ft_str_is_alpha 'helloThereMyfriend' 1
+check 02 ft_str_is_alpha 'Monty-Python!' 0
+check 02 ft_str_is_alpha 'MontyPython123' 0
+check 02 ft_str_is_alpha '' 1
+check 03 ft_str_is_numeric '42pool' 0
+check 03 ft_str_is_numeric '' 1
+check 03 ft_str_is_numeric '421237' 1
+check 03 ft_str_is_numeric ' 42' 0
+check 03 ft_str_is_numeric '4 2' 0
+check 04 ft_str_is_lowercase '' 1
+check 04 ft_str_is_lowercase 'hellothere' 1
+check 04 ft_str_is_lowercase 'helloThere' 0
+check 04 ft_str_is_lowercase 'hello there' 0
+check 04 ft_str_is_lowercase 'hello,there' 0
+check 04 ft_str_is_lowercase ' hellothere' 0
+check 04 ft_str_is_lowercase 'hellothere ' 0
+check 04 ft_str_is_lowercase '' 1
+check 05 ft_str_is_uppercase '' 1
+check 05 ft_str_is_uppercase 'HELLOTHERE' 1
+check 05 ft_str_is_uppercase 'HELLOtHERE' 0
+check 05 ft_str_is_uppercase 'HELLO,THERE' 0
+check 05 ft_str_is_uppercase 'HELLO THERE' 0
+check 05 ft_str_is_uppercase ' HELLOTHERE' 0
+check 05 ft_str_is_uppercase 'HELLOTHERE ' 0
+check 06 ft_str_is_printable
+check 07 ft_strupcase ' Salve, mundi! ' ' SALVE, MUNDI! '
+check 07 ft_strupcase '123 dOnE' '123 DONE'
+check 08 ft_strlowcase ' Salve, mundi! ' ' salve, mundi! '
+check 08 ft_strlowcase '123 DoNE!' '123 done!'
+check 09 ft_strcapitalize '123 DoNE!' '123 Done!'
+check 09 ft_strcapitalize '123 wellDoNE!' '123 Welldone!'
+check 09 ft_strcapitalize '123 well done!' '123 Well Done!'
+check 09 ft_strcapitalize '123 donEwell you HAVE!' '123 Donewell You Have!'
+check 09 ft_strcapitalize 'salut, comment tu vas ? 42mots quarante-deux; cinquante+et+un' 'Salut, Comment Tu Vas ? 42mots Quarante-Deux; Cinquante+Et+Un'
+check 09 ft_strcapitalize 'hello &world *q' 'Hello &World *Q'
+check 10 ft_strlcpy 'kobyla ma maly bok' 1000
+check 10 ft_strlcpy '   kobyla   ma\t maly bok' 85
+check 10 ft_strlcpy 'KOBYLA "NEma" maly BOK' 0
+check 10 ft_strlcpy '8327 fdskljfh lsdkfh89 ;,.,/[]' 20
+check_diff 11 ft_putstr_non_printable 'char *str'
