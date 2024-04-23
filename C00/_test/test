@@ -48,13 +48,15 @@ check_diff()
 }
 
 ########## NORMINETTE ##########
-tar cf docasno.tar *.c
-rm *.c
-cd ..
-norminette
-cd _test
-tar xf docasno.tar
-rm docasno.tar
+if [ $1 ] && [ $1 = '-n' ]; then
+	tar cf docasno.tar *.c
+	rm *.c
+	cd ..
+	norminette
+	cd _test
+	tar xf docasno.tar
+	rm docasno.tar
+fi
 ################################
 
 check_diff 00 ft_putchar
