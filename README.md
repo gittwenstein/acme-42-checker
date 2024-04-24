@@ -45,7 +45,7 @@ For clarity's sake, let's take it step by step:
 	cd ~/projects/C00
 	rm _test.tar.gz
 	```
-6. To test your project, go to the `_test` dir. This is **vital**. All the paths in the test script are ***relative***, so--unless you modify the script to your liking (which you are more than welcome to do)--it is **imperative** that you run the sript ***from within*** the `_test` directory. Otherwise chaos will ensue.
+6. To test your project, go to the `_test` dir. This is **vital**. All the paths in the test script are ***relative***, so--unless you modify the script to your liking (which you are more than welcome to do)--it is **imperative** that you run the script ***from within*** the `_test` directory. Otherwise chaos will ensue.
 	```bash
 	cd ~/projects/C00/_test
 	./test
@@ -54,7 +54,7 @@ For clarity's sake, let's take it step by step:
 	```bash
 	./test -n
 	```
-8. If you decide to use the tests *in your own code*, **do not commit**, worse yet, push anything from your repo, until you make absolutely sure, the test files won't get pushed upstream. ***First***, make sure you have the `.gitignore` file in your local repo:
+8. If you decide to use the tests *in your own code*, **do not commit**, worse yet, push anything from your repo, until you make absolutely sure the test files won't get pushed upstream. ***First***, make sure you have the `.gitignore` file in your local repo:
 	```bash
 	~/projects/C00/.gitignore
 	```
