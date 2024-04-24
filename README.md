@@ -40,16 +40,21 @@ For clarity's sake, let's take it step by step:
 	- ```bash
 		~/projects/C00/tar zxvf _test.tar.gz
 		``` 
-5. To test your project, go to the `_test` dir. This is **vital**. All the paths in the test script are ***relative***, so--unless you modify the script to your liking (which you are more than welcome to do)--it is **imperative** that you run the sript ***from within*** the `_test` directory. Otherwise chaos will ensue.
+5. If you are using the test ***in your own repo***, don't forget to **DELETE** the zipped file `_test.tar.gz`, so that you don't accidentally commit/push it upstream. This file and the unpacked folder must stay on your local machine only. Likewise, do not forget about **step 8**, and adding the `_test` folder to `.gitignore`.
+	```bash
+	cd ~/projects/C00
+	rm _test.tar.gz
+	```
+6. To test your project, go to the `_test` dir. This is **vital**. All the paths in the test script are ***relative***, so--unless you modify the script to your liking (which you are more than welcome to do)--it is **imperative** that you run the sript ***from within*** the `_test` directory. Otherwise chaos will ensue.
 	```bash
 	cd ~/projects/C00/_test
 	./test
 	```
-6. Should you like to run the `norminette` tests as well, run the script with the flag `-n`:
+7. Should you like to run the `norminette` tests as well, run the script with the flag `-n`:
 	```bash
 	./test -n
 	```
-7. If you decide to use the tests *in your own code*, **do not commit**, worse yet, push anything from your repo, until you make absolutely sure, the test files won't get pushed upstream. ***First***, make sure you have the `.gitignore` file in your local repo:
+8. If you decide to use the tests *in your own code*, **do not commit**, worse yet, push anything from your repo, until you make absolutely sure, the test files won't get pushed upstream. ***First***, make sure you have the `.gitignore` file in your local repo:
 	```bash
 	~/projects/C00/.gitignore
 	```
