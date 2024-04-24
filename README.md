@@ -49,6 +49,16 @@ For clarity's sake, let's take it step by step:
 	```bash
 	./test -n
 	```
+7. If you decide to use the tests *in your own code*, **do not commit**, worse yet, push anything from your repo, until you make absolutely sure, the test files won't get pushed upstream. ***First***, make sure you have the `.gitignore` file in your local repo:
+	```bash
+	~/projects/C00/.gitignore
+	```
+	And that in `.gitignore`, you have these two lines (plus, of course, whatever lines you've already had there):
+	```
+	.gitignore
+	_test
+	```
+	**Now**, you are ***safe to proceed***. Now, the _test folder and everything in it, as well as the .gitignore file will stay safely on your local machine, and your local machine only.
 
 ## Happy coding
 More tests are coming, obviously. If you find them useful, and new ones don't pop up here soon enough for you, feel absolutely free to use the template from the test suites to write better, more comprehensive tests...faster. Me be human. Me need sleep here. And there. `EOF`
