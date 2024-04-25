@@ -1,0 +1,87 @@
+#!/bin/bash
+
+R='\033[0;31m'
+G='\033[0;32m'
+B='\033[0;33m'
+Y='\033[0;33m'
+NC='\033[0m'
+COMPILE='cc *.c'
+
+check() 
+{
+    echo -en "${Y}Exercise $1	${NC}"
+    if [ -f ../ex$1/$2.c ]; then
+        cc test$1.c ../ex$1/$2.c
+		./a.out "$3" "$4"
+		if [ $? = 0 ]; then
+            echo -e "${G}OK${NC}"
+        else
+			if [ "$4" ]; then 
+				echo -e "${R}Execution failed for input:${NC} ${Y}$3${NC}"
+			fi
+            echo -e "${R}KO${NC}"
+        fi    
+		rm a.out
+	else
+        echo -e "${R}Solution file not found${NC}"
+    fi
+}
+
+check_diff()
+{
+	echo -en "${Y}Exercise $1	${NC}"
+    if [ -f ../ex$1/$2.c ]; then
+		cc test$1.c ../ex$1/$2.c
+		./a.out "$4" "$5" > output
+		if [ -f a.out ] && diff output "expected_output/$2($3)" > dump; then
+			echo -e "${G}OK${NC}"
+        else
+			if [ "$4" ]; then 
+				echo -e "	Execution failed for input: $4 $5" 
+			fi
+            echo -e "${R}KO${NC}"
+        fi 
+		rm a.out
+	else
+        echo -e "${R}Solution file not found${NC}"
+    fi
+}
+
+########## NORMINETTE ##########
+if [ $1 ] && [ $1 = '-n' ]; then
+	# echo HELLO
+	tar cf docasno.tar *.c
+	rm *.c
+	cd ..
+	norminette
+	cd _test
+	tar xf docasno.tar
+	rm docasno.tar
+fi
+################################
+
+check 00 ft_strlen
+check_diff 01 ft_putstr 0 'Hello, world.'
+check_diff 01 ft_putstr 1 '"Hello, world."'
+check_diff 01 ft_putstr 2 '""'
+check_diff 01 ft_putstr 3 'salVe, wORLd!'
+check_diff 01 ft_putstr 4 '		 	Kobyla ma	maly "bok"...  	'
+check_diff 01 ft_putstr 5 ''
+check_diff 02 ft_putnbr 0 0
+check_diff 02 ft_putnbr 123 123
+check_diff 02 ft_putnbr 2147483647 2147483647
+check_diff 02 ft_putnbr -1 -1
+check_diff 02 ft_putnbr -2147483648 -2147483648
+check_diff 03 ft_atoi 0	'42'
+check_diff 03 ft_atoi 1 '-42'
+check_diff 03 ft_atoi 2	'	 +-+123'
+check_diff 03 ft_atoi 3	'	 ---+-+123 224'
+check_diff 03 ft_atoi 4 '  	 ---+--+1234ab567'
+check_diff 03 ft_atoi 5 '-+-+-+-44332211,2334'
+check_diff 04 ft_putnbr_base 0	'pkousko' ''
+check_diff 04 ft_putnbr_base 1	'123' '1'
+check_diff 04 ft_putnbr_base 2	'123' '121'
+check_diff 04 ft_putnbr_base 3  '1234522' '0123456798'
+check_diff 04 ft_putnbr_base 4	'9' '01'
+check_diff 04 ft_putnbr_base 5	'255' '0123456789ABCDEF'
+check 05 ft_atoi_base
