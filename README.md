@@ -6,9 +6,9 @@ Life is short. Swimming in the **_char \*pool = '\*'_** is **shorter**. Don't wa
 |:---:|:---:|:---:|:---|
 |C00|9/9|[Test suite for C00](C00/_test.tar.gz)||
 |C01|9/9|[Test suite for C01](C01/_test.tar.gz)||
-|C02|12/13|[Test suite for C02](C02/_test.tar.gz)| Test for the last ex12 coming if and when I find the time |
-|C03|0/6||Coming soon|
-|C04|0/6||Coming soon|
+|C02|12/13|[Test suite for C02](C02/_test.tar.gz)| Test for ex12 coming if and when I find the time |
+|C03|6/6|[Test suite for C03](C03/_test.tar.gz)||
+|C04|6/6|[Test suite for C04](C04/_test.tar.gz)||
 
 ## Why?
 Draining of the pool is fast approaching, and wasting precious eval points (and, consequently, time as well), just to see if the auditors at Darth Moul & Computress Inette, Ltd. will be kind to you (this time), is akin to wasting money on lottery tickets. Looking at the calendar, I panicked, slept on it, calmed down, and started writing code *the way it's supposed to be written*. **Tests first**! Implemenation to pass the tests, second.
