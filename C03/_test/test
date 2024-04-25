@@ -1,0 +1,81 @@
+#!/bin/bash
+
+R='\033[0;31m'
+G='\033[0;32m'
+B='\033[0;33m'
+Y='\033[0;33m'
+NC='\033[0m'
+COMPILE='cc *.c'
+
+check() 
+{
+    echo -en "${Y}Exercise $1	${NC}"
+    if [ -f ../ex$1/$2.c ]; then
+        cc test$1.c ../ex$1/$2.c
+		./a.out "$3" "$4"
+		if [ $? = 0 ]; then
+            echo -e "${G}OK${NC}"
+        else
+			echo -e "${R}Execution failed for input:${NC} ${Y}$3${NC}"
+            echo -e "${R}KO${NC}"
+        fi    
+		rm a.out
+	else
+        echo -e "${R}Solution file not found${NC}"
+    fi
+}
+
+check_diff()
+{
+	echo -en "${Y}Exercise $1	${NC}"
+    if [ -f ../ex$1/$2.c ]; then
+		cc test$1.c ../ex$1/$2.c
+		./a.out "$4" > output
+		if [ -f a.out ] && diff output "expected_output/$2($3)" > dump; then
+			echo -e "${G}OK${NC}"
+        else
+			if [ "$4" ]; then 
+				echo -e "	Execution failed for input: $4" 
+			fi
+            echo -e "${R}KO${NC}"
+        fi 
+		rm a.out
+	else
+        echo -e "${R}Solution file not found${NC}"
+    fi
+}
+
+########## NORMINETTE ##########
+if [ $1 ] && [ $1 = '-n' ]; then
+	# echo HELLO
+	tar cf docasno.tar *.c
+	rm *.c
+	cd ..
+	norminette
+	cd _test
+	tar xf docasno.tar
+	rm docasno.tar
+fi
+################################
+
+check 00 ft_strcmp
+check 01 ft_strncmp 5 5
+check 01 ft_strncmp 0 0cd 
+check 01 ft_strncmp 1 1
+check 01 ft_strncmp 10 10
+check 01 ft_strncmp 20 20
+check 01 ft_strncmp 123 123
+check 02 ft_strcat
+check 03 ft_strncat 5 5
+check 03 ft_strncat 0 0
+check 03 ft_strncat 1 1
+check 03 ft_strncat 10 10
+check 03 ft_strncat 20 20
+check 03 ft_strncat 123 123
+check 04 ft_strstr
+check 05 ft_strlcat 5 5
+check 05 ft_strlcat 0 0
+check 05 ft_strlcat 1 1
+check 05 ft_strlcat 10 10
+check 05 ft_strlcat 20 20
+check 05 ft_strlcat 123 123
