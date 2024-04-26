@@ -84,4 +84,7 @@ check_diff 04 ft_putnbr_base 2	'123' '121'
 check_diff 04 ft_putnbr_base 3  '1234522' '0123456798'
 check_diff 04 ft_putnbr_base 4	'9' '01'
 check_diff 04 ft_putnbr_base 5	'255' '0123456789ABCDEF'
+check_diff 04 ft_putnbr_base 6	'-2147483648' '0123456789'
+check_diff 04 ft_putnbr_base 7	'2147483647' '0123456789'
+check_diff 04 ft_putnbr_base 8	'255' '01'
 check 05 ft_atoi_base
