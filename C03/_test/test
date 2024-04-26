@@ -60,7 +60,7 @@ fi
 
 check 00 ft_strcmp
 check 01 ft_strncmp 5 5
-check 01 ft_strncmp 0 0cd 
+check 01 ft_strncmp 0 0
 check 01 ft_strncmp 1 1
 check 01 ft_strncmp 10 10
 check 01 ft_strncmp 20 20
